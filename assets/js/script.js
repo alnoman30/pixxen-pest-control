@@ -560,3 +560,44 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   });
+
+  // 
+  // ================= Pest recent workS: SPLIDE MARQUEE (continuous, auto-scroll, draggable) =================
+// Scoped to '.pest-recent-work-slider' only, no generic selectors.
+document.addEventListener('DOMContentLoaded', () => {
+    const el = document.querySelector('.pest-recent-work-slider');
+    if (!el) return;
+
+    const splide = new Splide(el, {
+        type: 'loop',
+        drag: 'free',
+        focus: 'center',        
+        perPage: 1,             
+        autoWidth: true,
+        gap: 24,
+        arrows: false,
+        pagination: false,
+      
+        autoScroll: {
+            speed: 0.6,
+            pauseOnHover: true,
+            pauseOnFocus: false,
+            rewind: false,      
+        },
+        breakpoints: {
+            640: {
+                gap: 12,
+            },
+        },
+    });
+
+    splide.on('mounted', () => {
+        const autoScroll = splide.Components.AutoScroll;
+        if (autoScroll) {
+            splide.on('drag', () => autoScroll.pause());
+            splide.on('dragged', () => autoScroll.play());
+        }
+    });
+
+    splide.mount({ AutoScroll: window.splide.Extensions.AutoScroll });
+});
