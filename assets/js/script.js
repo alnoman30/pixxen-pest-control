@@ -546,10 +546,10 @@ document.addEventListener("DOMContentLoaded", function () {
         y: 0,
         filter: "blur(0px)",
         rotateX: 0,
-        duration: 1.05,
+        duration: 0.5,
         ease: "power3.out",
         stagger: {
-          each: 0.025,
+          each: 0.015,
           from: "start",
         },
         scrollTrigger: {
