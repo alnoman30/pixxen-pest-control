@@ -1,145 +1,37 @@
-          <div
-            class="xl:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 lg:gap-6 xl:gap-8"
-          >
-            <!-- card 1 -->
-            <div
-              class="group flex-1 bg-transparent border border-dashed border-[#000000] hover:border-solid hover:border-[#930013] hover:bg-white/40 hover:backdrop-blur-xl hover:shadow-[12px_24px_48px_0_rgba(48,48,48,0.08)] p-4 md:p-6 lg:p-8 rounded-3xl md:rounded-[28px] lg:rounded-4xl transition-all duration-300"
-            >
-              <span
-                class="inline-flex items-center justify-center bg-[#FFC600] text-[#930013] px-3 py-1.5 rounded-full anton font-normal leading-6 text-xs md:text-base lg:text-lg xl:text-xl uppercase mb-4 md:mb-6"
-              >
-                LOCAL SEO
-              </span>
+document.addEventListener('DOMContentLoaded', () => {
+    const el = document.querySelector('.pest-testimonial-slider');
+    if (!el) return;
 
-              <h3
-                class="anton text-[#303030] group-hover:text-[#930013] text-lg md:text-[22px] lg:text-2xl xl:text-[28px] font-normal leading-[130%] origin-left group-hover:scale-105 mb-2.5 md:mb-3 transition-all duration-300"
-              >
-                The pest control Google Business Profile audit
-              </h3>
+    const splide = new Splide(el, {
+        type: 'loop',
+        drag: 'free',
+        focus: 'center',        
+        perPage: 1,             
+        autoWidth: true,
+        gap: 24,
+        arrows: false,
+        pagination: false,
+      
+        autoScroll: {
+            speed: 0.6,
+            pauseOnHover: true,
+            pauseOnFocus: false,
+            rewind: false,      
+        },
+        breakpoints: {
+            640: {
+                gap: 12,
+            },
+        },
+    });
 
-              <p
-                class="stack-sans-text text-[#616161] text-xs md:text-sm lg:text-base font-normal leading-[150%]"
-              >
-                GBP categories, services, photo cadence for pest control
-                companies.
-              </p>
-            </div>
+    splide.on('mounted', () => {
+        const autoScroll = splide.Components.AutoScroll;
+        if (autoScroll) {
+            splide.on('drag', () => autoScroll.pause());
+            splide.on('dragged', () => autoScroll.play());
+        }
+    });
 
-            <!-- card 2 -->
-            <div
-              class="group flex-1 bg-transparent border border-dashed border-[#000000] hover:border-solid hover:border-[#930013] hover:bg-white/40 hover:backdrop-blur-xl hover:shadow-[12px_24px_48px_0_rgba(48,48,48,0.08)] p-4 md:p-6 lg:p-8 rounded-3xl md:rounded-[28px] lg:rounded-4xl transition-all duration-300"
-            >
-              <span
-                class="inline-flex items-center justify-center bg-[#FFC600] text-[#930013] px-3 py-1.5 rounded-full anton font-normal leading-6 text-xs md:text-base lg:text-lg xl:text-xl uppercase mb-4 md:mb-6"
-              >
-                CONTENT
-              </span>
-
-              <h3
-                class="anton text-[#303030] group-hover:text-[#930013] text-lg md:text-[22px] lg:text-2xl xl:text-[28px] font-normal leading-[130%] origin-left group-hover:scale-105 mb-2.5 md:mb-3 transition-all duration-300"
-              >
-                How to write pest-specific pages that rank
-              </h3>
-
-              <p
-                class="stack-sans-text text-[#616161] text-xs md:text-sm lg:text-base font-normal leading-[150%]"
-              >
-                Per-pest structure (roaches, termites, bed bugs) that captures
-                the actual search intent.
-              </p>
-            </div>
-
-            <!-- card 3 -->
-            <div
-              class="group flex-1 bg-transparent border border-dashed border-[#000000] hover:border-solid hover:border-[#930013] hover:bg-white/40 hover:backdrop-blur-xl hover:shadow-[12px_24px_48px_0_rgba(48,48,48,0.08)] p-4 md:p-6 lg:p-8 rounded-3xl md:rounded-[28px] lg:rounded-4xl transition-all duration-300"
-            >
-              <span
-                class="inline-flex items-center justify-center bg-[#FFC600] text-[#930013] px-3 py-1.5 rounded-full anton font-normal leading-6 text-xs md:text-base lg:text-lg xl:text-xl uppercase mb-4 md:mb-6"
-              >
-                RECURRING
-              </span>
-
-              <h3
-                class="anton text-[#303030] group-hover:text-[#930013] text-lg md:text-[22px] lg:text-2xl xl:text-[28px] font-normal leading-[130%] origin-left group-hover:scale-105 mb-2.5 md:mb-3 transition-all duration-300"
-              >
-                Building recurring pest control plans that convert
-              </h3>
-
-              <p
-                class="stack-sans-text text-[#616161] text-xs md:text-sm lg:text-base font-normal leading-[150%]"
-              >
-                Quarterly vs bi-monthly vs monthly - what we've seen work across
-                markets.
-              </p>
-            </div>
-
-            <!-- card 4 -->
-            <div
-              class="group flex-1 bg-transparent border border-dashed border-[#000000] hover:border-solid hover:border-[#930013] hover:bg-white/40 hover:backdrop-blur-xl hover:shadow-[12px_24px_48px_0_rgba(48,48,48,0.08)] p-4 md:p-6 lg:p-8 rounded-3xl md:rounded-[28px] lg:rounded-4xl transition-all duration-300"
-            >
-              <span
-                class="inline-flex items-center justify-center bg-[#FFC600] text-[#930013] px-3 py-1.5 rounded-full anton font-normal leading-6 text-xs md:text-base lg:text-lg xl:text-xl uppercase mb-4 md:mb-6"
-              >
-                DISCREET
-              </span>
-
-              <h3
-                class="anton text-[#303030] group-hover:text-[#930013] text-lg md:text-[22px] lg:text-2xl xl:text-[28px] font-normal leading-[130%] origin-left group-hover:scale-105 mb-2.5 md:mb-3 transition-all duration-300"
-              >
-                The bed bug funnel that respects customer privacy
-              </h3>
-
-              <p
-                class="stack-sans-text text-[#616161] text-xs md:text-sm lg:text-base font-normal leading-[150%]"
-              >
-                Discreet messaging, unmarked vehicles, contact flow that doesn't
-                expose customers.
-              </p>
-            </div>
-
-            <!-- card 5 -->
-            <div
-              class="group flex-1 bg-transparent border border-dashed border-[#000000] hover:border-solid hover:border-[#930013] hover:bg-white/40 hover:backdrop-blur-xl hover:shadow-[12px_24px_48px_0_rgba(48,48,48,0.08)] p-4 md:p-6 lg:p-8 rounded-3xl md:rounded-[28px] lg:rounded-4xl transition-all duration-300"
-            >
-              <span
-                class="inline-flex items-center justify-center bg-[#FFC600] text-[#930013] px-3 py-1.5 rounded-full anton font-normal leading-6 text-xs md:text-base lg:text-lg xl:text-xl uppercase mb-4 md:mb-6"
-              >
-                EPA
-              </span>
-
-              <h3
-                class="anton text-[#303030] group-hover:text-[#930013] text-lg md:text-[22px] lg:text-2xl xl:text-[28px] font-normal leading-[130%] origin-left group-hover:scale-105 mb-2.5 md:mb-3 transition-all duration-300"
-              >
-                Surfacing EPA and state licensing for trust
-              </h3>
-
-              <p
-                class="stack-sans-text text-[#616161] text-xs md:text-sm lg:text-base font-normal leading-[150%]"
-              >
-                What credentials to display, where, and how to phrase them.
-              </p>
-            </div>
-
-            <!-- card 6 -->
-            <div
-              class="group flex-1 bg-transparent border border-dashed border-[#000000] hover:border-solid hover:border-[#930013] hover:bg-white/40 hover:backdrop-blur-xl hover:shadow-[12px_24px_48px_0_rgba(48,48,48,0.08)] p-4 md:p-6 lg:p-8 rounded-3xl md:rounded-[28px] lg:rounded-4xl transition-all duration-300"
-            >
-              <span
-                class="inline-flex items-center justify-center bg-[#FFC600] text-[#930013] px-3 py-1.5 rounded-full anton font-normal leading-6 text-xs md:text-base lg:text-lg xl:text-xl uppercase mb-4 md:mb-6"
-              >
-                SOFTWARE
-              </span>
-
-              <h3
-                class="anton text-[#303030] group-hover:text-[#930013] text-lg md:text-[22px] lg:text-2xl xl:text-[28px] font-normal leading-[130%] origin-left group-hover:scale-105 mb-2.5 md:mb-3 transition-all duration-300"
-              >
-                PestPac vs FieldRoutes vs GorillaDesk vs ServSuite in 2026
-              </h3>
-
-              <p
-                class="stack-sans-text text-[#616161] text-xs md:text-sm lg:text-base font-normal leading-[150%]"
-              >
-                Honest comparison of pest control software by operation size.
-              </p>
-            </div>
-          </div>
+    splide.mount({ AutoScroll: window.splide.Extensions.AutoScroll });
+});
