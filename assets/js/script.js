@@ -825,7 +825,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// 
+// Pest testimonial slider
 document.addEventListener('DOMContentLoaded', () => {
     const el = document.querySelector('.pest-testimonial-slider');
     if (!el) return;
