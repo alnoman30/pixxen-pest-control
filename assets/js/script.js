@@ -601,3 +601,97 @@ document.addEventListener('DOMContentLoaded', () => {
 
     splide.mount({ AutoScroll: window.splide.Extensions.AutoScroll });
 });
+
+// Pest recent work animation
+document.addEventListener('DOMContentLoaded', () => {
+  if (!window.gsap) return;
+  const grid = document.getElementById('pest-recent-works-grid');
+  if (!grid) return; // bail on pages without portfolio
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from('.work-card', {
+    y: 60,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.15,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '#pest-recent-works-grid',
+      start: 'top 85%'
+    }
+  });
+
+  const medias = [...grid.querySelectorAll('.pest-recent-work-media')];
+  const cursors = medias
+    .map((m) => m.querySelector('.pest-custom-cursor'))
+    .filter(Boolean);
+
+  if (!medias.length) return;
+
+  cursors.forEach((cursor) =>
+    gsap.set(cursor, {
+      xPercent: -50,
+      yPercent: -50,
+      scale: 0,
+      opacity: 0
+    })
+  );
+
+  const showCursor = (cursor) =>
+    gsap.to(cursor, {
+      scale: 1,
+      opacity: 1,
+      duration: 0.45,
+      ease: 'back.out(1.8)',
+      overwrite: 'auto'
+    });
+
+  const hideCursor = (cursor) =>
+    gsap.to(cursor, {
+      scale: 0,
+      opacity: 0,
+      duration: 0.3,
+      ease: 'power2.in',
+      overwrite: 'auto'
+    });
+
+  medias.forEach((media) => {
+    const cursor = media.querySelector('.pest-custom-cursor');
+    if (!cursor) return;
+
+    const pos = (e) => {
+      const r = media.getBoundingClientRect();
+      return {
+        x: e.clientX - r.left,
+        y: e.clientY - r.top
+      };
+    };
+
+    media.addEventListener('mouseenter', (e) => {
+      cursors.forEach((c) => {
+        if (c !== cursor) hideCursor(c);
+      });
+
+      const p = pos(e);
+      gsap.set(cursor, { x: p.x, y: p.y });
+      showCursor(cursor);
+    });
+
+    media.addEventListener('mousemove', (e) => {
+      const p = pos(e);
+      // Increased duration to 0.8s for a much slower, glide-like follow effect
+      gsap.to(cursor, {
+        x: p.x,
+        y: p.y,
+        duration: 0.8,
+        ease: 'power3.out',
+        overwrite: 'auto'
+      });
+    });
+
+    media.addEventListener('mouseleave', () => hideCursor(cursor));
+  });
+
+  grid.addEventListener('mouseleave', () => cursors.forEach(hideCursor));
+});
