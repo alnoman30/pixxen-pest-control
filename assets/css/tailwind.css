@@ -136,9 +136,9 @@ nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
-  background: radial-gradient(50% 50% at 50% 50%, #000080 0%, #000050 100%);
+ background: radial-gradient(50% 100% at 50% 100%, #FFC600 0%, #930013 100%);
   /* dark panel bg */
-  border: 1px solid #ffa500;
+  border: 1px solid #FFC600;
   border-radius: 24px;
   list-style: none;
   padding: 0;
@@ -193,8 +193,8 @@ nav {
 
 .dropdown-service-list a:hover,
 .dropdown-service-list a.active {
-  background-color: #ffa500;
-  color: #000050;
+  background-color: #FFC600;
+  color: #930013;
 }
 
 /* Service icon wrapper */
@@ -843,6 +843,35 @@ html.lenis body {
 }
 
 /* Pixxen Pest control CSS start here */
+.pest-cta-button {
+  --x: 50%;
+  --y: 50%;
+}
+
+.pest-cta-button-glow {
+  left: var(--x);
+  top: var(--y);
+  width: 0;
+  height: 0;
+
+  background: radial-gradient(
+    circle,
+    #ffc600 0%,
+    rgba(255, 198, 0, 0.75) 35%,
+    rgba(255, 198, 0, 0) 75%
+  );
+
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.35s ease,
+    height 0.35s ease;
+}
+
+.pest-cta-button:hover .pest-cta-button-glow {
+  width: 450px;
+  height: 450px;
+}
+
 .pest-cta-button {
   --x: 50%;
   --y: 50%;
