@@ -695,3 +695,132 @@ document.addEventListener('DOMContentLoaded', () => {
 
   grid.addEventListener('mouseleave', () => cursors.forEach(hideCursor));
 });
+
+
+// pest Timeline js
+
+document.addEventListener("DOMContentLoaded", () => {
+  const timelines = gsap.utils.toArray(".pest-timeline");
+
+  if (!timelines.length) return;
+
+  timelines.forEach((timeline, index) => {
+    const track = timeline.querySelector(".timeline-track");
+    const items = gsap.utils.toArray(".timeline-item", timeline);
+    const nodes = items.map(i => i.querySelector(".timeline-node"));
+    const cards = items.map(i => i.querySelector(".timeline-card"));
+
+    const isDesktop = () =>
+      window.matchMedia("(min-width: 1024px)").matches;
+
+    let lastIsDesktop = isDesktop();
+    let scrollTrigger;
+
+    function setInitialStates() {
+      gsap.set(track, {
+        scaleX: isDesktop() ? 0 : 1,
+        scaleY: isDesktop() ? 1 : 0
+      });
+
+      gsap.set(nodes, {
+        scale: 0,
+        opacity: 0
+      });
+
+      gsap.set(cards, {
+        autoAlpha: 0,
+        y: 28
+      });
+    }
+
+    function playTimeline() {
+      const tl = gsap.timeline({
+        defaults: {
+          ease: "power3.out"
+        }
+      });
+
+      // Line
+      tl.to(track, {
+        ...(isDesktop()
+          ? { scaleX: 1 }
+          : { scaleY: 1 }),
+        duration: 0.9,
+        ease: "power2.inOut"
+      });
+
+      // Nodes
+      tl.to(
+        nodes,
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.18,
+          ease: "back.out(1.6)"
+        },
+        "-=0.35"
+      );
+
+      // Cards
+      tl.to(
+        cards,
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.18
+        },
+        "<0.05"
+      );
+    }
+
+    function createScrollTrigger() {
+      scrollTrigger = ScrollTrigger.create({
+        trigger: timeline,
+        start: "top 78%",
+        once: true,
+        onEnter: playTimeline
+      });
+    }
+
+    // Initial state
+    setInitialStates();
+
+    // Scroll reveal
+    createScrollTrigger();
+
+    // Resize handling
+    let resizeTimer;
+
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+
+      resizeTimer = setTimeout(() => {
+        const currentIsDesktop = isDesktop();
+
+        if (currentIsDesktop !== lastIsDesktop) {
+          lastIsDesktop = currentIsDesktop;
+
+          gsap.killTweensOf([
+            track,
+            ...nodes,
+            ...cards
+          ]);
+
+          setInitialStates();
+
+          if (scrollTrigger) {
+            scrollTrigger.kill();
+          }
+
+          ScrollTrigger.refresh();
+
+          createScrollTrigger();
+        } else {
+          ScrollTrigger.refresh();
+        }
+      }, 200);
+    });
+  });
+});
