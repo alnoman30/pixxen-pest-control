@@ -1,3 +1,5 @@
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
 // ============================================
 // MOBILE MENU & NAVBAR
 // ============================================
@@ -512,54 +514,33 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 
-    document.addEventListener("DOMContentLoaded", () => {
-    gsap.registerPlugin(SplitText, ScrollTrigger);
+  // Pest heading reveal
+document.addEventListener("DOMContentLoaded", () => {
+    gsap.registerPlugin(ScrollTrigger, SplitText);
 
-    /* =========================================
-       SECTION HEADING REVEAL
-       Reusable for every .pest-heading-reveal
-    ========================================= */
-    const sectionHeadings = document.querySelectorAll(
-      ".pest-heading-reveal"
-    );
-
-    sectionHeadings.forEach((heading) => {
+    gsap.utils.toArray(".pest-heading-reveal").forEach((heading) => {
+      // Split into lines, GSAP handles the wrapping/masking automatically
       const split = new SplitText(heading, {
-        type: "words,chars",
-        wordsClass: "pest-heading-word",
-        charsClass: "pest-heading-char",
+        type: "lines",
+        linesClass: "split-line",
+        mask: "lines", // built-in overflow mask on each line — clean clip on entry
       });
 
-      // Initial state
-      gsap.set(split.chars, {
+      gsap.from(split.lines, {
+        yPercent: 110,
         opacity: 0,
-        y: 35,
-        filter: "blur(8px)",
-        rotateX: -35,
-        transformOrigin: "50% 100%",
-      });
-
-      // Animate when heading enters viewport
-      gsap.to(split.chars, {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        rotateX: 0,
-        duration: 0.5,
-        ease: "power3.out",
-        stagger: {
-          each: 0.015,
-          from: "start",
-        },
+        duration: 1,
+        stagger: 0.12,
+        ease: "power4.out",
         scrollTrigger: {
           trigger: heading,
-          start: "top 82%",
-          once: true,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
         },
       });
     });
   });
+
 
   // 
   // ================= Pest recent workS: SPLIDE MARQUEE (continuous, auto-scroll, draggable) =================
