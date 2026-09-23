@@ -535,7 +535,7 @@ document.addEventListener("DOMContentLoaded", () => {
         scrollTrigger: {
           trigger: heading,
           start: "top 85%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
       });
     });
